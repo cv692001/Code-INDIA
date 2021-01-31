@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+#ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+    freopen("output.txt", "w", stdout);
+#endif
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        long long int n;
+        cin>>n;
+        string s;
+        cin>>s;
+        long long int dp1[n],dp2[n];
+        dp1[0]=0;
+        if(s[0]=='0')
+        dp1[0]++;
+        for(long long int i=1;i<n;i++)
+        {
+            dp1[i]=dp1[i-1];
+            if(s[i]=='0')
+            dp1[i]++;
+        }
+        dp2[n-1]=0;
+        if(s[n-1]=='1')
+        dp2[n-1]++;
+        for(long long int i=n-2;i>=0;i--)
+        {
+            dp2[i]=dp2[i+1];
+            if(s[i]=='1')
+            dp2[i]++;
+        }
+
+
+
+        long long int answer=0;
+        for(long long int i=0;i<n;i++)
+        {
+            answer=max(answer,dp1[i]+dp2[i]);
+        }
+        cout<<n-answer<<endl;
+    }
+}
